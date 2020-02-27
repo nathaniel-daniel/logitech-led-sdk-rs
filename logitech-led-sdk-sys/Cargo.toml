@@ -1,0 +1,11 @@
+[package]
+name = "logitech-led-sdk-sys"
+version = "0.0.1"
+authors = [ "adumbidiot <nathaniel.daniel23@outlook.com>" ]
+edition = "2018"
+build = "build.rs"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.51.1"
