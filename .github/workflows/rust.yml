@@ -21,6 +21,14 @@ jobs:
       run: 7z x LED_SDK_9.00.zip
     - name: Set Logitech LED SDK Location
       run: echo "LOGITECH_LED_SDK=${env:GITHUB_WORKSPACE}/LED" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+    - name: Install Scoop
+      run: |
+        iwr -useb get.scoop.sh | iex
+        echo "::add-path::$($HOME)/scoop/shims"
+    - name: Install LLVM
+      run: |
+        scoop install llvm
+        echo "::set-env name=LIBCLANG_PATH::$($HOME)/scoop/apps/llvm/current/bin"
     - name: Build
       run: cargo build --verbose
     - name: Run Tests
