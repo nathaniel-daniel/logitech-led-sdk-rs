@@ -16,35 +16,44 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
           components: rustfmt, clippy 
           override: true
+          
       - name: Download Logitech LED SDK
         run: Invoke-WebRequest -Uri https://www.logitechg.com/sdk/LED_SDK_9.00.zip -OutFile LED_SDK_9.00.zip
+        
       - name: Extract Logitech LED SDK
         run: 7z x LED_SDK_9.00.zip
+        
       - name: Set Logitech LED SDK Location
         run: echo "LOGITECH_LED_SDK=${env:GITHUB_WORKSPACE}/LED" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        
       - name: Install Scoop
         run: |
           iwr -useb get.scoop.sh | iex
           echo "$($HOME)/scoop/shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          
       - name: Install LLVM
         run: |
           scoop install llvm
           echo "LIBCLANG_PATH=$($HOME)/scoop/apps/llvm/current/bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          
       - name: Rustfmt
         uses: actions-rs/cargo@v1
         with:
           command: fmt
           args: '-- --check --color always'
+          
       - name: Fetch
         uses: actions-rs/cargo@v1
         with:
           command: fetch
+          
       - name: Clippy
         uses: actions-rs/cargo@v1
         with:
@@ -56,6 +65,7 @@ jobs:
     steps: 
       - name: Checkout
         uses: actions/checkout@v2
+        
       - name: Deny
         uses: EmbarkStudios/cargo-deny-action@v1
 
@@ -65,22 +75,29 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      
     - name: Download Logitech LED SDK
       run: Invoke-WebRequest -Uri https://www.logitechg.com/sdk/LED_SDK_9.00.zip -OutFile LED_SDK_9.00.zip
+      
     - name: Extract Logitech LED SDK
       run: 7z x LED_SDK_9.00.zip
+      
     - name: Set Logitech LED SDK Location
       run: echo "LOGITECH_LED_SDK=${env:GITHUB_WORKSPACE}/LED" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      
     - name: Install Scoop
       run: |
         iwr -useb get.scoop.sh | iex
         echo "$($HOME)/scoop/shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        
     - name: Install LLVM
       run: |
         scoop install llvm
         echo "LIBCLANG_PATH=$($HOME)/scoop/apps/llvm/current/bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        
     - name: Build
       run: cargo build --verbose
+    
     # Cannot test on CI as there is no LGS or LGHUB on there. Is it possible to install it?
     # - name: Run Tests
     #   run: cargo test --all --verbose
