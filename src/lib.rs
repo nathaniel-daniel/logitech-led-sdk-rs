@@ -12,10 +12,10 @@ pub use sys::LogiLed_KeyName as KeyName;
 pub struct Color {
     /// Red
     pub r: u8,
-    
+
     /// Green
     pub g: u8,
-    
+
     /// Blue
     pub b: u8,
 }
