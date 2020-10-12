@@ -10,6 +10,15 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  deny:
+    name: Deny
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deny
+        uses: EmbarkStudios/cargo-deny-action@v1
+
   build:
     runs-on: windows-latest
     steps:

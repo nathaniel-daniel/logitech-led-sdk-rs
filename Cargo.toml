@@ -3,6 +3,7 @@ name = "logitech-led-sdk"
 version = "0.0.1"
 authors = [ "adumbidiot <nathaniel.daniel23@outlook.com>" ]
 edition = "2018"
+license = "MIT"
 
 [dependencies]
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
