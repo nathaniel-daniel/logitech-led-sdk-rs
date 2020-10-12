@@ -262,7 +262,7 @@ mod test {
     #[test]
     #[serial]
     fn sanity_check() {
-        let sdk = Sdk::new().unwrap();
+        let sdk = Sdk::new().expect("LG SDK");
         drop(sdk);
         let sdk = Sdk::new_with_name("Test").unwrap();
         let _version = sdk.get_version().unwrap();
@@ -305,7 +305,7 @@ mod test {
     #[test]
     #[serial]
     fn logi_set_target_zone_sample() {
-        let sdk = Sdk::new_with_name("Test").unwrap();
+        let sdk = Sdk::new_with_name("Test").expect("LG SDK");
         assert!(sdk.set_target(Target::All));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::L, Color::new(0, 255, 255)));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::O, Color::new(0, 255, 255)));
