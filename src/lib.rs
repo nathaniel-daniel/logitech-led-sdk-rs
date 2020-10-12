@@ -1,4 +1,4 @@
-use logitech_led_sdk_sys as sys;
+pub use logitech_led_sdk_sys as sys;
 use std::convert::TryInto;
 use std::ffi::CString;
 use std::marker::PhantomData;
@@ -10,8 +10,13 @@ pub use sys::LogiLed_KeyName as KeyName;
 /// RGB Color
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Color {
+    /// Red
     pub r: u8,
+
+    /// Green
     pub g: u8,
+
+    /// Blue
     pub b: u8,
 }
 
@@ -50,11 +55,11 @@ impl Target {
     }
 }
 
-/// Entry to Api
+/// Entry to Api. This serves as proof of initalization.
 pub struct Sdk(PhantomData<*const u8>);
 
 impl Sdk {
-    /// New instance with no name
+    /// Create a new instance with no name. Returns None on failure.
     pub fn new() -> Option<Self> {
         let init = unsafe { sys::LogiLedInit() };
         if !init {
@@ -64,7 +69,7 @@ impl Sdk {
         Some(Sdk(PhantomData))
     }
 
-    /// New instance with name. Also returns none if passed &str has no valid cstr rep
+    /// Create a new instance with a name. Returns None on failure or if the passed name contains 0s.
     pub fn new_with_name(name: &str) -> Option<Self> {
         let name = CString::new(name).ok()?;
         let init = unsafe { sys::LogiLedInitWithName(name.as_ptr()) };
@@ -262,7 +267,7 @@ mod test {
     #[test]
     #[serial]
     fn sanity_check() {
-        let sdk = Sdk::new().unwrap();
+        let sdk = Sdk::new().expect("LG SDK");
         drop(sdk);
         let sdk = Sdk::new_with_name("Test").unwrap();
         let _version = sdk.get_version().unwrap();
@@ -305,7 +310,7 @@ mod test {
     #[test]
     #[serial]
     fn logi_set_target_zone_sample() {
-        let sdk = Sdk::new_with_name("Test").unwrap();
+        let sdk = Sdk::new_with_name("Test").expect("LG SDK");
         assert!(sdk.set_target(Target::All));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::L, Color::new(0, 255, 255)));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::O, Color::new(0, 255, 255)));
