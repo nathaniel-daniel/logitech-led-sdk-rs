@@ -11,10 +11,17 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Download Logitech LED SDK
+      run: Invoke-WebRequest -Uri https://www.logitechg.com/sdk/LED_SDK_9.00.zip -OutFile LED_SDK_9.00.zip
+    - name: Extract Logitech LED SDK
+      run: 7z x LED_SDK_9.00.zip
+    - name: Set Logitech LED SDK Location
+      run: echo "::set-env name=LOGITECH_LED_SDK::${env:GITHUB_WORKSPACE}/LED" 
     - name: Build
       run: cargo build --verbose
+    - name: Run Tests
+      run: cargo test --all --verbose
