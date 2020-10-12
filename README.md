@@ -1,5 +1,6 @@
 # logitech-led-sdk-rs
-A Rust Binding for the Logitech LED Library. Tested with v9.00.
+A Rust Binding for the Logitech LED Library. This was built and tested with v9.00. It will most likely work with LGS and definitely works with LG HUB. 
+Due to a lack of documentation, the SDK is assumed to be single-threaded.
 
 # Building
 You need to seperately download the LG SDK. You can find it publicly [here](https://www.logitechg.com/en-us/innovation/developer-lab.html).
@@ -11,6 +12,8 @@ Example: `LOGITECH_LED_SDK = C:\Users\[username]\Documents\code\LED_SDK_9.00\LED
 # Example
 ```rust
 use logitech_led_sdk::Sdk;
+use logitech_led_sdk::Color;
+use logitech_led_sdk::Target;
 
 fn main() {
     let sdk = Sdk::new_with_name("Test").unwrap();
@@ -22,3 +25,6 @@ fn main() {
     assert!(sdk.set_lighting(Color::new(255, 255, 255)));
 }
 ```
+
+# License
+This crate is dual-licensed under [Apache](./LICENSE-APACHE) and [MIT](LICENSE-MIT).
