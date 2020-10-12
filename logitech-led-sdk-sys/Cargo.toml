@@ -9,4 +9,4 @@ license = "MIT / Apache-2.0"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.53.2"
+bindgen = "0.55.1"
