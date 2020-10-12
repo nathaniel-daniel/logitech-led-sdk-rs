@@ -1,8 +1,9 @@
 [package]
 name = "logitech-led-sdk"
-version = "0.0.1"
+version = "0.0.0"
 authors = [ "adumbidiot <nathaniel.daniel23@outlook.com>" ]
 edition = "2018"
+license = "MIT / Apache-2.0"
 
 [dependencies]
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
