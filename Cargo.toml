@@ -9,7 +9,7 @@ license = "MIT OR Apache-2.0"
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
 
 [dev-dependencies]
-serial_test = "0.6.0"
+serial_test = "0.7.0"
 
 [workspace]
 members = [
