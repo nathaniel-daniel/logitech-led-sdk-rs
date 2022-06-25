@@ -2,6 +2,9 @@
 A Rust Binding for the Logitech LED Library. This was built and tested with v9.00. It will most likely work with LGS and definitely works with LG HUB. 
 Due to a lack of documentation, the SDK is assumed to be single-threaded.
 
+# Documentation
+See <https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk/>
+
 # Building
 You need to seperately download the LG SDK. You can find it publicly [here](https://www.logitechg.com/en-us/innovation/developer-lab.html).
 
