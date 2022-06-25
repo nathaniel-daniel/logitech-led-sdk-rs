@@ -1,16 +1,19 @@
 use std::path::PathBuf;
 
 fn main() {
-    let sdk_dir = std::env::var("LOGITECH_LED_SDK").expect("LOGITECH_LED_SDK");
+    let sdk_dir = std::env::var("LOGITECH_LED_SDK").expect("missing or invalid `LOGITECH_LED_SDK`");
     let include_dir = format!("{}//Include", sdk_dir);
-    let out_dir = std::env::var("OUT_DIR").unwrap();
+    let out_dir = std::env::var("OUT_DIR").expect("missing or invalid `OUT_DIR`");
     let out_path = PathBuf::from(out_dir);
 
-    if std::env::var("CARGO_CFG_WINDOWS").is_err() {
+    if std::env::var_os("CARGO_CFG_WINDOWS").is_none() {
         panic!("This library will only work on Windows");
     }
 
-    match std::env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+    match std::env::var("CARGO_CFG_TARGET_ARCH")
+        .expect("missing or invalid `CARGO_CFG_TARGET_ARCH`")
+        .as_str()
+    {
         "x86_64" => {
             println!("cargo:rustc-link-search={}/Lib/x64", sdk_dir);
         }
@@ -18,7 +21,7 @@ fn main() {
             println!("cargo:rustc-link-search={}/Lib/x86", sdk_dir);
         }
         arch => {
-            panic!("Arch '{}' is not supported", arch);
+            panic!("Arch `{}` is not supported", arch);
         }
     };
 
@@ -30,9 +33,9 @@ fn main() {
         .header("wrapper.h")
         .clang_arg("-xc++")
         .clang_arg(&format!("-I{}", include_dir))
-        .whitelist_type("LogiLed::.*")
-        .whitelist_function("Logi.*")
-        .whitelist_var(".*")
+        .allowlist_type("LogiLed::.*")
+        .allowlist_function("Logi.*")
+        .allowlist_var(".*")
         .rustified_enum("LogiLed::.*")
         .generate()
         .expect("Unable to generate bindings");

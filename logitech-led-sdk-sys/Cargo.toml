@@ -1,12 +1,12 @@
 [package]
 name = "logitech-led-sdk-sys"
 version = "0.0.0"
-authors = [ "adumbidiot <nathaniel.daniel23@outlook.com>" ]
+authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2018"
 build = "build.rs"
-license = "MIT / Apache-2.0"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.57.0"
+bindgen = "0.60.1"
