@@ -1,11 +1,20 @@
 pub use logitech_led_sdk_sys as sys;
+use once_cell::sync::Lazy;
 use std::convert::TryInto;
 use std::ffi::CString;
-use std::marker::PhantomData;
 use std::os::raw::c_int;
+use std::sync::Mutex;
+use std::sync::MutexGuard;
+use std::sync::TryLockError;
 use std::time::Duration;
 pub use sys::LogiLed_DeviceType as DeviceType;
 pub use sys::LogiLed_KeyName as KeyName;
+
+/// The lock that syncs accesses to the SDK.
+///
+/// If you use raw sdk api functions anywhere, you MUST use this lock to wrap accesses to the sdk in order to prevent data races.
+/// This library does all this for you, this is exposed only for users who want to use raw sdk functions safely.
+pub static SDK_LOCK: Lazy<Mutex<()>> = Lazy::new(|| Mutex::new(()));
 
 /// RGB Color
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -55,22 +64,42 @@ impl Target {
     }
 }
 
-/// Entry to Api. This serves as proof of initalization.
-pub struct Sdk(PhantomData<*const u8>);
+/// Entry to Api.
+///
+/// This serves as proof of initalization and prevents the API from being used by other threads.
+pub struct Sdk(MutexGuard<'static, ()>);
 
 impl Sdk {
-    /// Create a new instance with no name. Returns None on failure.
+    /// Create a new instance with no name.
+    ///
+    /// # Returns
+    /// Returns None on failure.
     pub fn new() -> Option<Self> {
+        let guard = match SDK_LOCK.try_lock() {
+            Ok(guard) => guard,
+            Err(TryLockError::WouldBlock) => return None,
+            Err(TryLockError::Poisoned(e)) => e.into_inner(),
+        };
+
         let init = unsafe { sys::LogiLedInit() };
         if !init {
             return None;
         }
 
-        Some(Sdk(PhantomData))
+        Some(Sdk(guard))
     }
 
-    /// Create a new instance with a name. Returns None on failure or if the passed name contains 0s.
+    /// Create a new instance with a name.
+    ///
+    /// # Returns
+    /// Returns None on failure or if the passed name contains interior NULs.
     pub fn new_with_name(name: &str) -> Option<Self> {
+        let guard = match SDK_LOCK.try_lock() {
+            Ok(guard) => guard,
+            Err(TryLockError::WouldBlock) => return None,
+            Err(TryLockError::Poisoned(e)) => e.into_inner(),
+        };
+
         let name = CString::new(name).ok()?;
         let init = unsafe { sys::LogiLedInitWithName(name.as_ptr()) };
 
@@ -78,7 +107,7 @@ impl Sdk {
             return None;
         }
 
-        Some(Sdk(PhantomData))
+        Some(Sdk(guard))
     }
 
     /// Returns sdk version. Returns None on failure.
@@ -196,7 +225,10 @@ impl Sdk {
         unsafe { sys::LogiLedStopEffectsOnKey(key as _) }
     }
 
-    /// Returns None if the call fails or any of the time values are too large. Duration how long the pulses occur overall. The interval is the time between pulses.
+    /// Returns None if the call fails or any of the time values are too large.
+    ///
+    /// Duration is how long the pulses occur overall.
+    /// The interval is the time between pulses.
     pub fn pulse_lighting(&self, color: Color, duration: Duration, interval: Duration) -> bool {
         let p = color.percentage();
         let duration: c_int = match duration.as_millis().try_into() {
@@ -267,9 +299,15 @@ mod test {
     #[test]
     #[serial]
     fn sanity_check() {
+        // 1st init
         let sdk = Sdk::new().expect("LG SDK");
+        std::thread::sleep(std::time::Duration::from_secs(5));
         drop(sdk);
+        std::thread::sleep(std::time::Duration::from_secs(5));
+
+        // 2nd init
         let sdk = Sdk::new_with_name("Test").unwrap();
+        std::thread::sleep(std::time::Duration::from_secs(5));
         let _version = sdk.get_version().unwrap();
         assert!(sdk.set_target(Target::All));
         assert!(sdk.set_lighting(Color::new(255, 255, 255)));
@@ -304,13 +342,16 @@ mod test {
             Duration::from_millis(10_000),
             true
         ));
-        assert!(sdk.stop_effects_on_key(KeyName::L,));
+        assert!(sdk.stop_effects_on_key(KeyName::L));
+        drop(sdk);
+        std::thread::sleep(std::time::Duration::from_secs(5));
     }
 
     #[test]
     #[serial]
     fn logi_set_target_zone_sample() {
         let sdk = Sdk::new_with_name("Test").expect("LG SDK");
+        std::thread::sleep(std::time::Duration::from_secs(5));
         assert!(sdk.set_target(Target::All));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::L, Color::new(0, 255, 255)));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::O, Color::new(0, 255, 255)));
@@ -331,5 +372,7 @@ mod test {
             Color::new(255, 255, 255)
         ));
         assert!(sdk.set_lighting_for_target_zone(DeviceType::Headset, 1, Color::new(255, 0, 255)));
+        drop(sdk);
+        std::thread::sleep(std::time::Duration::from_secs(5));
     }
 }
