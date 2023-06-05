@@ -75,15 +75,15 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-lint-cargo-${{ hashFiles('**/Cargo.lock') }}
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-lint-cargo-${{ hashFiles('**/Cargo.lock') }}
       
     - name: Download Logitech LED SDK
       run: Invoke-WebRequest -Uri https://www.logitechg.com/sdk/LED_SDK_9.00.zip -OutFile LED_SDK_9.00.zip
