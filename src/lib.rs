@@ -1,5 +1,4 @@
 pub use logitech_led_sdk_sys as sys;
-use once_cell::sync::Lazy;
 use std::convert::TryInto;
 use std::ffi::CString;
 use std::os::raw::c_int;
@@ -14,7 +13,7 @@ pub use sys::LogiLed_KeyName as KeyName;
 ///
 /// If you use raw sdk api functions anywhere, you MUST use this lock to wrap accesses to the sdk in order to prevent data races.
 /// This library does all this for you, this is exposed only for users who want to use raw sdk functions safely.
-pub static SDK_LOCK: Lazy<Mutex<()>> = Lazy::new(|| Mutex::new(()));
+pub static SDK_LOCK: Mutex<()> = Mutex::new(());
 
 /// RGB Color
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
