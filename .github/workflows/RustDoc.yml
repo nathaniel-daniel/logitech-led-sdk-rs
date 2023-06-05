@@ -5,20 +5,16 @@ on:
       - master
 
 jobs:
+  name: RustDoc
   rustdoc:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v3
 
     - name: Install Rust toolchain
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        profile: minimal
-        override: true
-        components: rustfmt, rust-src
+      uses: dtolnay/rust-toolchain@stable
         
     - name: Download Logitech LED SDK
       run: Invoke-WebRequest -Uri https://www.logitechg.com/sdk/LED_SDK_9.00.zip -OutFile LED_SDK_9.00.zip
