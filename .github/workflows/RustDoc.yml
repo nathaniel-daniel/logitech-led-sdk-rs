@@ -5,8 +5,9 @@ on:
       - master
 
 jobs:
-  name: RustDoc
   rustdoc:
+    name: RustDoc
+    
     runs-on: windows-latest
 
     steps:
