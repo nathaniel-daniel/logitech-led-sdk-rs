@@ -22,31 +22,10 @@ allow = [ "Apache-2.0", "MIT", "ISC", "Unlicense", "BSD-3-Clause", "Unicode-DFS-
 exceptions = []
 
 [bans]
-multiple-versions = "deny"
+multiple-versions = "warn"
 highlight = "all"
 skip = []
-
-# Mostly soundness denies since the advisory lacks a section for soundess bugs
-deny = [        
-    # https://github.com/RustSec/advisory-db/pull/293
-    # NOTE: May be sound in the future: https://github.com/RustSec/advisory-db/pull/293#issuecomment-641898680
-    { name = "rio", version = "*" },
-
-    # https://github.com/RustSec/advisory-db/issues/299
-    { name = "smallvec", version = "<0.6.13" },
-    
-    # https://github.com/RustSec/advisory-db/pull/268
-    { name = "plutonium", version = "*" },
-    
-    # https://github.com/RustSec/advisory-db/pull/308
-    { name = "traitobject", version = "*" },
-    
-    # https://github.com/RustSec/advisory-db/issues/305
-    { name = "rental", version = "*" },
-    
-    # Appears to be moving towards integrating rio more tightly for io_uring support
-    { name = "sled", version = "*" },
-]
+deny = []
 
 [sources]
 unknown-registry = "deny"

@@ -2,11 +2,11 @@
 name = "logitech-led-sdk-sys"
 version = "0.0.0"
 authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
-edition = "2018"
+edition = "2021"
 build = "build.rs"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.64.0"
+bindgen = "0.65.1"

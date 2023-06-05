@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 fn main() {
     let sdk_dir = std::env::var("LOGITECH_LED_SDK").expect("missing or invalid `LOGITECH_LED_SDK`");
-    let include_dir = format!("{}//Include", sdk_dir);
+    let include_dir = format!("{sdk_dir}//Include");
     let out_dir = std::env::var_os("OUT_DIR").expect("missing `OUT_DIR`");
     let out_path = PathBuf::from(out_dir);
 
@@ -15,13 +15,13 @@ fn main() {
         .as_str()
     {
         "x86_64" => {
-            println!("cargo:rustc-link-search={}/Lib/x64", sdk_dir);
+            println!("cargo:rustc-link-search={sdk_dir}/Lib/x64");
         }
         "x86" => {
-            println!("cargo:rustc-link-search={}/Lib/x86", sdk_dir);
+            println!("cargo:rustc-link-search={sdk_dir}/Lib/x86");
         }
         arch => {
-            panic!("Arch `{}` is not supported", arch);
+            panic!("Arch \"{arch}\" is not supported");
         }
     };
 
@@ -32,15 +32,15 @@ fn main() {
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
         .clang_arg("-xc++")
-        .clang_arg(format!("-I{}", include_dir))
+        .clang_arg(format!("-I{include_dir}"))
         .allowlist_type("LogiLed::.*")
         .allowlist_function("Logi.*")
         .allowlist_var(".*")
         .rustified_enum("LogiLed::.*")
         .generate()
-        .expect("Unable to generate bindings");
+        .expect("unable to generate bindings");
 
     bindings
         .write_to_file(out_path.join("bindings.rs"))
-        .expect("Couldn't write bindings!");
+        .expect("failed to write bindings");
 }
