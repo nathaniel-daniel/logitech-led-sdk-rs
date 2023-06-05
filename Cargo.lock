@@ -220,7 +220,6 @@ name = "logitech-led-sdk"
 version = "0.0.0"
 dependencies = [
  "logitech-led-sdk-sys",
- "once_cell",
  "serial_test",
 ]
 
