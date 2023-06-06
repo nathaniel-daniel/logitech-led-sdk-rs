@@ -1,13 +1,21 @@
 [package]
 name = "logitech-led-sdk"
-version = "0.0.0"
+version = "0.1.0"
 authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 license = "MIT OR Apache-2.0"
+description = "A Rust binding for the Logitech LED SDK"
+repository = "https://github.com/nathaniel-daniel/logitech-led-sdk-rs"
+exclude = [
+    ".github",
+    "deny.toml",
+    "CHANGELOG.md",
+    ".gitignore",
+]
 
 [dependencies]
 bitflags = "2.3.1"
-logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
+logitech-led-sdk-sys = { path = "logitech-led-sdk-sys", version = "0.1.0" }
 
 [features]
 default = []
