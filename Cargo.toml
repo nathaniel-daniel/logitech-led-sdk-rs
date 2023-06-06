@@ -5,6 +5,13 @@ authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "A Rust binding for the Logitech LED SDK"
+repository = "https://github.com/nathaniel-daniel/logitech-led-sdk-rs"
+exclude = [
+    ".github",
+    "deny.toml",
+    "CHANGELOG.md",
+    ".gitignore",
+]
 
 [dependencies]
 bitflags = "2.3.1"
