@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 license = "MIT OR Apache-2.0"
+description = "A Rust binding for the Logitech LED SDK"
 
 [dependencies]
 bitflags = "2.3.1"
