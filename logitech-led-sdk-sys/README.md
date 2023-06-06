@@ -3,6 +3,7 @@ A low level Rust binding for the Logitech LED SDK.
 
 ## Documentation
 Release: https://docs.rs/logitech-led-sdk-sys/latest/logitech_led_sdk_sys/
+
 Master: https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk_sys/
 
 ## Building
