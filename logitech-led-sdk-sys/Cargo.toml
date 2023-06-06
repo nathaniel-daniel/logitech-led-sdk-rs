@@ -1,6 +1,6 @@
 [package]
 name = "logitech-led-sdk-sys"
-version = "0.0.0"
+version = "0.1.0"
 authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 build = "build.rs"
