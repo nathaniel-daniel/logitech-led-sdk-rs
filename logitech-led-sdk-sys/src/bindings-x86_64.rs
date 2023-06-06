@@ -12,134 +12,372 @@ pub const LOGI_DEVICETYPE_MONOCHROME: u32 = 1;
 pub const LOGI_DEVICETYPE_RGB: u32 = 2;
 pub const LOGI_DEVICETYPE_PERKEY_RGB: u32 = 4;
 pub const LOGI_DEVICETYPE_ALL: u32 = 7;
-#[repr(i32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
-pub enum LogiLed_KeyName {
-    ESC = 1,
-    F1 = 59,
-    F2 = 60,
-    F3 = 61,
-    F4 = 62,
-    F5 = 63,
-    F6 = 64,
-    F7 = 65,
-    F8 = 66,
-    F9 = 67,
-    F10 = 68,
-    F11 = 87,
-    F12 = 88,
-    PRINT_SCREEN = 311,
-    SCROLL_LOCK = 70,
-    PAUSE_BREAK = 325,
-    TILDE = 41,
-    ONE = 2,
-    TWO = 3,
-    THREE = 4,
-    FOUR = 5,
-    FIVE = 6,
-    SIX = 7,
-    SEVEN = 8,
-    EIGHT = 9,
-    NINE = 10,
-    ZERO = 11,
-    MINUS = 12,
-    EQUALS = 13,
-    BACKSPACE = 14,
-    INSERT = 338,
-    HOME = 327,
-    PAGE_UP = 329,
-    NUM_LOCK = 69,
-    NUM_SLASH = 309,
-    NUM_ASTERISK = 55,
-    NUM_MINUS = 74,
-    TAB = 15,
-    Q = 16,
-    W = 17,
-    E = 18,
-    R = 19,
-    T = 20,
-    Y = 21,
-    U = 22,
-    I = 23,
-    O = 24,
-    P = 25,
-    OPEN_BRACKET = 26,
-    CLOSE_BRACKET = 27,
-    BACKSLASH = 43,
-    KEYBOARD_DELETE = 339,
-    END = 335,
-    PAGE_DOWN = 337,
-    NUM_SEVEN = 71,
-    NUM_EIGHT = 72,
-    NUM_NINE = 73,
-    NUM_PLUS = 78,
-    CAPS_LOCK = 58,
-    A = 30,
-    S = 31,
-    D = 32,
-    F = 33,
-    G = 34,
-    H = 35,
-    J = 36,
-    K = 37,
-    L = 38,
-    SEMICOLON = 39,
-    APOSTROPHE = 40,
-    ENTER = 28,
-    NUM_FOUR = 75,
-    NUM_FIVE = 76,
-    NUM_SIX = 77,
-    LEFT_SHIFT = 42,
-    Z = 44,
-    X = 45,
-    C = 46,
-    V = 47,
-    B = 48,
-    N = 49,
-    M = 50,
-    COMMA = 51,
-    PERIOD = 52,
-    FORWARD_SLASH = 53,
-    RIGHT_SHIFT = 54,
-    ARROW_UP = 328,
-    NUM_ONE = 79,
-    NUM_TWO = 80,
-    NUM_THREE = 81,
-    NUM_ENTER = 284,
-    LEFT_CONTROL = 29,
-    LEFT_WINDOWS = 347,
-    LEFT_ALT = 56,
-    SPACE = 57,
-    RIGHT_ALT = 312,
-    RIGHT_WINDOWS = 348,
-    APPLICATION_SELECT = 349,
-    RIGHT_CONTROL = 285,
-    ARROW_LEFT = 331,
-    ARROW_DOWN = 336,
-    ARROW_RIGHT = 333,
-    NUM_ZERO = 82,
-    NUM_PERIOD = 83,
-    G_1 = 65521,
-    G_2 = 65522,
-    G_3 = 65523,
-    G_4 = 65524,
-    G_5 = 65525,
-    G_6 = 65526,
-    G_7 = 65527,
-    G_8 = 65528,
-    G_9 = 65529,
-    G_LOGO = 1048561,
-    G_BADGE = 1048562,
+impl LogiLed_KeyName {
+    pub const ESC: LogiLed_KeyName = LogiLed_KeyName(1);
 }
-#[repr(i32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
-pub enum LogiLed_DeviceType {
-    Keyboard = 0,
-    Mouse = 3,
-    Mousemat = 4,
-    Headset = 8,
-    Speaker = 14,
+impl LogiLed_KeyName {
+    pub const F1: LogiLed_KeyName = LogiLed_KeyName(59);
 }
+impl LogiLed_KeyName {
+    pub const F2: LogiLed_KeyName = LogiLed_KeyName(60);
+}
+impl LogiLed_KeyName {
+    pub const F3: LogiLed_KeyName = LogiLed_KeyName(61);
+}
+impl LogiLed_KeyName {
+    pub const F4: LogiLed_KeyName = LogiLed_KeyName(62);
+}
+impl LogiLed_KeyName {
+    pub const F5: LogiLed_KeyName = LogiLed_KeyName(63);
+}
+impl LogiLed_KeyName {
+    pub const F6: LogiLed_KeyName = LogiLed_KeyName(64);
+}
+impl LogiLed_KeyName {
+    pub const F7: LogiLed_KeyName = LogiLed_KeyName(65);
+}
+impl LogiLed_KeyName {
+    pub const F8: LogiLed_KeyName = LogiLed_KeyName(66);
+}
+impl LogiLed_KeyName {
+    pub const F9: LogiLed_KeyName = LogiLed_KeyName(67);
+}
+impl LogiLed_KeyName {
+    pub const F10: LogiLed_KeyName = LogiLed_KeyName(68);
+}
+impl LogiLed_KeyName {
+    pub const F11: LogiLed_KeyName = LogiLed_KeyName(87);
+}
+impl LogiLed_KeyName {
+    pub const F12: LogiLed_KeyName = LogiLed_KeyName(88);
+}
+impl LogiLed_KeyName {
+    pub const PRINT_SCREEN: LogiLed_KeyName = LogiLed_KeyName(311);
+}
+impl LogiLed_KeyName {
+    pub const SCROLL_LOCK: LogiLed_KeyName = LogiLed_KeyName(70);
+}
+impl LogiLed_KeyName {
+    pub const PAUSE_BREAK: LogiLed_KeyName = LogiLed_KeyName(325);
+}
+impl LogiLed_KeyName {
+    pub const TILDE: LogiLed_KeyName = LogiLed_KeyName(41);
+}
+impl LogiLed_KeyName {
+    pub const ONE: LogiLed_KeyName = LogiLed_KeyName(2);
+}
+impl LogiLed_KeyName {
+    pub const TWO: LogiLed_KeyName = LogiLed_KeyName(3);
+}
+impl LogiLed_KeyName {
+    pub const THREE: LogiLed_KeyName = LogiLed_KeyName(4);
+}
+impl LogiLed_KeyName {
+    pub const FOUR: LogiLed_KeyName = LogiLed_KeyName(5);
+}
+impl LogiLed_KeyName {
+    pub const FIVE: LogiLed_KeyName = LogiLed_KeyName(6);
+}
+impl LogiLed_KeyName {
+    pub const SIX: LogiLed_KeyName = LogiLed_KeyName(7);
+}
+impl LogiLed_KeyName {
+    pub const SEVEN: LogiLed_KeyName = LogiLed_KeyName(8);
+}
+impl LogiLed_KeyName {
+    pub const EIGHT: LogiLed_KeyName = LogiLed_KeyName(9);
+}
+impl LogiLed_KeyName {
+    pub const NINE: LogiLed_KeyName = LogiLed_KeyName(10);
+}
+impl LogiLed_KeyName {
+    pub const ZERO: LogiLed_KeyName = LogiLed_KeyName(11);
+}
+impl LogiLed_KeyName {
+    pub const MINUS: LogiLed_KeyName = LogiLed_KeyName(12);
+}
+impl LogiLed_KeyName {
+    pub const EQUALS: LogiLed_KeyName = LogiLed_KeyName(13);
+}
+impl LogiLed_KeyName {
+    pub const BACKSPACE: LogiLed_KeyName = LogiLed_KeyName(14);
+}
+impl LogiLed_KeyName {
+    pub const INSERT: LogiLed_KeyName = LogiLed_KeyName(338);
+}
+impl LogiLed_KeyName {
+    pub const HOME: LogiLed_KeyName = LogiLed_KeyName(327);
+}
+impl LogiLed_KeyName {
+    pub const PAGE_UP: LogiLed_KeyName = LogiLed_KeyName(329);
+}
+impl LogiLed_KeyName {
+    pub const NUM_LOCK: LogiLed_KeyName = LogiLed_KeyName(69);
+}
+impl LogiLed_KeyName {
+    pub const NUM_SLASH: LogiLed_KeyName = LogiLed_KeyName(309);
+}
+impl LogiLed_KeyName {
+    pub const NUM_ASTERISK: LogiLed_KeyName = LogiLed_KeyName(55);
+}
+impl LogiLed_KeyName {
+    pub const NUM_MINUS: LogiLed_KeyName = LogiLed_KeyName(74);
+}
+impl LogiLed_KeyName {
+    pub const TAB: LogiLed_KeyName = LogiLed_KeyName(15);
+}
+impl LogiLed_KeyName {
+    pub const Q: LogiLed_KeyName = LogiLed_KeyName(16);
+}
+impl LogiLed_KeyName {
+    pub const W: LogiLed_KeyName = LogiLed_KeyName(17);
+}
+impl LogiLed_KeyName {
+    pub const E: LogiLed_KeyName = LogiLed_KeyName(18);
+}
+impl LogiLed_KeyName {
+    pub const R: LogiLed_KeyName = LogiLed_KeyName(19);
+}
+impl LogiLed_KeyName {
+    pub const T: LogiLed_KeyName = LogiLed_KeyName(20);
+}
+impl LogiLed_KeyName {
+    pub const Y: LogiLed_KeyName = LogiLed_KeyName(21);
+}
+impl LogiLed_KeyName {
+    pub const U: LogiLed_KeyName = LogiLed_KeyName(22);
+}
+impl LogiLed_KeyName {
+    pub const I: LogiLed_KeyName = LogiLed_KeyName(23);
+}
+impl LogiLed_KeyName {
+    pub const O: LogiLed_KeyName = LogiLed_KeyName(24);
+}
+impl LogiLed_KeyName {
+    pub const P: LogiLed_KeyName = LogiLed_KeyName(25);
+}
+impl LogiLed_KeyName {
+    pub const OPEN_BRACKET: LogiLed_KeyName = LogiLed_KeyName(26);
+}
+impl LogiLed_KeyName {
+    pub const CLOSE_BRACKET: LogiLed_KeyName = LogiLed_KeyName(27);
+}
+impl LogiLed_KeyName {
+    pub const BACKSLASH: LogiLed_KeyName = LogiLed_KeyName(43);
+}
+impl LogiLed_KeyName {
+    pub const KEYBOARD_DELETE: LogiLed_KeyName = LogiLed_KeyName(339);
+}
+impl LogiLed_KeyName {
+    pub const END: LogiLed_KeyName = LogiLed_KeyName(335);
+}
+impl LogiLed_KeyName {
+    pub const PAGE_DOWN: LogiLed_KeyName = LogiLed_KeyName(337);
+}
+impl LogiLed_KeyName {
+    pub const NUM_SEVEN: LogiLed_KeyName = LogiLed_KeyName(71);
+}
+impl LogiLed_KeyName {
+    pub const NUM_EIGHT: LogiLed_KeyName = LogiLed_KeyName(72);
+}
+impl LogiLed_KeyName {
+    pub const NUM_NINE: LogiLed_KeyName = LogiLed_KeyName(73);
+}
+impl LogiLed_KeyName {
+    pub const NUM_PLUS: LogiLed_KeyName = LogiLed_KeyName(78);
+}
+impl LogiLed_KeyName {
+    pub const CAPS_LOCK: LogiLed_KeyName = LogiLed_KeyName(58);
+}
+impl LogiLed_KeyName {
+    pub const A: LogiLed_KeyName = LogiLed_KeyName(30);
+}
+impl LogiLed_KeyName {
+    pub const S: LogiLed_KeyName = LogiLed_KeyName(31);
+}
+impl LogiLed_KeyName {
+    pub const D: LogiLed_KeyName = LogiLed_KeyName(32);
+}
+impl LogiLed_KeyName {
+    pub const F: LogiLed_KeyName = LogiLed_KeyName(33);
+}
+impl LogiLed_KeyName {
+    pub const G: LogiLed_KeyName = LogiLed_KeyName(34);
+}
+impl LogiLed_KeyName {
+    pub const H: LogiLed_KeyName = LogiLed_KeyName(35);
+}
+impl LogiLed_KeyName {
+    pub const J: LogiLed_KeyName = LogiLed_KeyName(36);
+}
+impl LogiLed_KeyName {
+    pub const K: LogiLed_KeyName = LogiLed_KeyName(37);
+}
+impl LogiLed_KeyName {
+    pub const L: LogiLed_KeyName = LogiLed_KeyName(38);
+}
+impl LogiLed_KeyName {
+    pub const SEMICOLON: LogiLed_KeyName = LogiLed_KeyName(39);
+}
+impl LogiLed_KeyName {
+    pub const APOSTROPHE: LogiLed_KeyName = LogiLed_KeyName(40);
+}
+impl LogiLed_KeyName {
+    pub const ENTER: LogiLed_KeyName = LogiLed_KeyName(28);
+}
+impl LogiLed_KeyName {
+    pub const NUM_FOUR: LogiLed_KeyName = LogiLed_KeyName(75);
+}
+impl LogiLed_KeyName {
+    pub const NUM_FIVE: LogiLed_KeyName = LogiLed_KeyName(76);
+}
+impl LogiLed_KeyName {
+    pub const NUM_SIX: LogiLed_KeyName = LogiLed_KeyName(77);
+}
+impl LogiLed_KeyName {
+    pub const LEFT_SHIFT: LogiLed_KeyName = LogiLed_KeyName(42);
+}
+impl LogiLed_KeyName {
+    pub const Z: LogiLed_KeyName = LogiLed_KeyName(44);
+}
+impl LogiLed_KeyName {
+    pub const X: LogiLed_KeyName = LogiLed_KeyName(45);
+}
+impl LogiLed_KeyName {
+    pub const C: LogiLed_KeyName = LogiLed_KeyName(46);
+}
+impl LogiLed_KeyName {
+    pub const V: LogiLed_KeyName = LogiLed_KeyName(47);
+}
+impl LogiLed_KeyName {
+    pub const B: LogiLed_KeyName = LogiLed_KeyName(48);
+}
+impl LogiLed_KeyName {
+    pub const N: LogiLed_KeyName = LogiLed_KeyName(49);
+}
+impl LogiLed_KeyName {
+    pub const M: LogiLed_KeyName = LogiLed_KeyName(50);
+}
+impl LogiLed_KeyName {
+    pub const COMMA: LogiLed_KeyName = LogiLed_KeyName(51);
+}
+impl LogiLed_KeyName {
+    pub const PERIOD: LogiLed_KeyName = LogiLed_KeyName(52);
+}
+impl LogiLed_KeyName {
+    pub const FORWARD_SLASH: LogiLed_KeyName = LogiLed_KeyName(53);
+}
+impl LogiLed_KeyName {
+    pub const RIGHT_SHIFT: LogiLed_KeyName = LogiLed_KeyName(54);
+}
+impl LogiLed_KeyName {
+    pub const ARROW_UP: LogiLed_KeyName = LogiLed_KeyName(328);
+}
+impl LogiLed_KeyName {
+    pub const NUM_ONE: LogiLed_KeyName = LogiLed_KeyName(79);
+}
+impl LogiLed_KeyName {
+    pub const NUM_TWO: LogiLed_KeyName = LogiLed_KeyName(80);
+}
+impl LogiLed_KeyName {
+    pub const NUM_THREE: LogiLed_KeyName = LogiLed_KeyName(81);
+}
+impl LogiLed_KeyName {
+    pub const NUM_ENTER: LogiLed_KeyName = LogiLed_KeyName(284);
+}
+impl LogiLed_KeyName {
+    pub const LEFT_CONTROL: LogiLed_KeyName = LogiLed_KeyName(29);
+}
+impl LogiLed_KeyName {
+    pub const LEFT_WINDOWS: LogiLed_KeyName = LogiLed_KeyName(347);
+}
+impl LogiLed_KeyName {
+    pub const LEFT_ALT: LogiLed_KeyName = LogiLed_KeyName(56);
+}
+impl LogiLed_KeyName {
+    pub const SPACE: LogiLed_KeyName = LogiLed_KeyName(57);
+}
+impl LogiLed_KeyName {
+    pub const RIGHT_ALT: LogiLed_KeyName = LogiLed_KeyName(312);
+}
+impl LogiLed_KeyName {
+    pub const RIGHT_WINDOWS: LogiLed_KeyName = LogiLed_KeyName(348);
+}
+impl LogiLed_KeyName {
+    pub const APPLICATION_SELECT: LogiLed_KeyName = LogiLed_KeyName(349);
+}
+impl LogiLed_KeyName {
+    pub const RIGHT_CONTROL: LogiLed_KeyName = LogiLed_KeyName(285);
+}
+impl LogiLed_KeyName {
+    pub const ARROW_LEFT: LogiLed_KeyName = LogiLed_KeyName(331);
+}
+impl LogiLed_KeyName {
+    pub const ARROW_DOWN: LogiLed_KeyName = LogiLed_KeyName(336);
+}
+impl LogiLed_KeyName {
+    pub const ARROW_RIGHT: LogiLed_KeyName = LogiLed_KeyName(333);
+}
+impl LogiLed_KeyName {
+    pub const NUM_ZERO: LogiLed_KeyName = LogiLed_KeyName(82);
+}
+impl LogiLed_KeyName {
+    pub const NUM_PERIOD: LogiLed_KeyName = LogiLed_KeyName(83);
+}
+impl LogiLed_KeyName {
+    pub const G_1: LogiLed_KeyName = LogiLed_KeyName(65521);
+}
+impl LogiLed_KeyName {
+    pub const G_2: LogiLed_KeyName = LogiLed_KeyName(65522);
+}
+impl LogiLed_KeyName {
+    pub const G_3: LogiLed_KeyName = LogiLed_KeyName(65523);
+}
+impl LogiLed_KeyName {
+    pub const G_4: LogiLed_KeyName = LogiLed_KeyName(65524);
+}
+impl LogiLed_KeyName {
+    pub const G_5: LogiLed_KeyName = LogiLed_KeyName(65525);
+}
+impl LogiLed_KeyName {
+    pub const G_6: LogiLed_KeyName = LogiLed_KeyName(65526);
+}
+impl LogiLed_KeyName {
+    pub const G_7: LogiLed_KeyName = LogiLed_KeyName(65527);
+}
+impl LogiLed_KeyName {
+    pub const G_8: LogiLed_KeyName = LogiLed_KeyName(65528);
+}
+impl LogiLed_KeyName {
+    pub const G_9: LogiLed_KeyName = LogiLed_KeyName(65529);
+}
+impl LogiLed_KeyName {
+    pub const G_LOGO: LogiLed_KeyName = LogiLed_KeyName(1048561);
+}
+impl LogiLed_KeyName {
+    pub const G_BADGE: LogiLed_KeyName = LogiLed_KeyName(1048562);
+}
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub struct LogiLed_KeyName(pub ::std::os::raw::c_int);
+impl LogiLed_DeviceType {
+    pub const Keyboard: LogiLed_DeviceType = LogiLed_DeviceType(0);
+}
+impl LogiLed_DeviceType {
+    pub const Mouse: LogiLed_DeviceType = LogiLed_DeviceType(3);
+}
+impl LogiLed_DeviceType {
+    pub const Mousemat: LogiLed_DeviceType = LogiLed_DeviceType(4);
+}
+impl LogiLed_DeviceType {
+    pub const Headset: LogiLed_DeviceType = LogiLed_DeviceType(8);
+}
+impl LogiLed_DeviceType {
+    pub const Speaker: LogiLed_DeviceType = LogiLed_DeviceType(14);
+}
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub struct LogiLed_DeviceType(pub ::std::os::raw::c_int);
 extern "C" {
     #[link_name = "\u{1}?LogiLedInit@@YA_NXZ"]
     pub fn LogiLedInit() -> bool;

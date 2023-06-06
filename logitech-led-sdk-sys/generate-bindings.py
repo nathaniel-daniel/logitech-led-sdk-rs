@@ -17,8 +17,7 @@ def generate_bindings(arch):
             '--allowlist-type', 'LogiLed::.*',
             '--allowlist-function', 'Logi.*',
             '--allowlist-var', '.*',
-            # TODO: This should be enumerated manually to insulate from ABI changes.
-            '--rustified-enum', 'LogiLed::.*',
+            '--newtype-enum', 'LogiLed::.*',
             '--',
             '-xc++',
             f'-I{LOGITECH_LED_SDK}//Include',
