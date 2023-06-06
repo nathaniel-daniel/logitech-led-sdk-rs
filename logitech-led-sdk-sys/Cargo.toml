@@ -7,3 +7,10 @@ build = "build.rs"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
+
+[features]
+default = []
+rustdoc = []
+
+[package.metadata.docs.rs]
+features = [ "rustdoc" ]

@@ -1,6 +1,6 @@
+#[cfg(not(feature = "rustdoc"))]
 fn main() {
     let sdk_dir = std::env::var("LOGITECH_LED_SDK").expect("missing or invalid `LOGITECH_LED_SDK`");
-
     match std::env::var("CARGO_CFG_TARGET_ARCH")
         .expect("missing or invalid `CARGO_CFG_TARGET_ARCH`")
         .as_str()
@@ -17,3 +17,6 @@ fn main() {
     };
     println!("cargo:rustc-link-lib=LogitechLEDLib");
 }
+
+#[cfg(feature = "rustdoc")]
+fn main() {}

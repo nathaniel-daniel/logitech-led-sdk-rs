@@ -6,8 +6,12 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-bitflags = "2"
+bitflags = "2.3.1"
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
+
+[features]
+default = []
+rustdoc = [ "logitech-led-sdk-sys/rustdoc" ]
 
 [workspace]
 members = [
