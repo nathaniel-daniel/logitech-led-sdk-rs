@@ -8,9 +8,6 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys" }
 
-[dev-dependencies]
-serial_test = "2.0.0"
-
 [workspace]
 members = [
 	"logitech-led-sdk-sys"
