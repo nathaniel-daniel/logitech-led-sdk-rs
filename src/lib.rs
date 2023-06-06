@@ -293,11 +293,14 @@ impl Drop for Sdk {
 #[cfg(test)]
 mod test {
     use super::*;
-    use serial_test::serial;
+
+    // A simple lock to ensure that only one test runs as a time.
+    static TEST_LOCK: Mutex<()> = Mutex::new(());
 
     #[test]
-    #[serial]
     fn sanity_check() {
+        let _test_lock = TEST_LOCK.lock().expect("test lock poisoned");
+
         // 1st init
         let sdk = Sdk::new().expect("LG SDK");
         std::thread::sleep(std::time::Duration::from_secs(5));
@@ -347,8 +350,9 @@ mod test {
     }
 
     #[test]
-    #[serial]
     fn logi_set_target_zone_sample() {
+        let _test_lock = TEST_LOCK.lock().expect("test lock poisoned");
+
         let sdk = Sdk::new_with_name("Test").expect("LG SDK");
         std::thread::sleep(std::time::Duration::from_secs(5));
         assert!(sdk.set_target(Target::All));
