@@ -7,7 +7,7 @@ The library will use internal synchronization to ensure accesses to the library 
 The goal of this binding is to provide a wrapper for the SDK, not to provide a method to interact with LEDs on Logitech devices. 
 
 ## Documentation
-Release: https://docs.rs/crate/logitech-led-sdk/latest
+Release: https://docs.rs/crate/logitech-led-sdk/latest/logitech_led_sdk/
 Master: https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk/
 
 ## Building
