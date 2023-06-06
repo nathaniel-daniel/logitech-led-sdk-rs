@@ -21,6 +21,9 @@ logitech-led-sdk-sys = { path = "logitech-led-sdk-sys", version = "0.1.0" }
 default = []
 rustdoc = [ "logitech-led-sdk-sys/rustdoc" ]
 
+[package.metadata.docs.rs]
+features = [ "rustdoc" ]
+
 [workspace]
 members = [
 	"logitech-led-sdk-sys"
