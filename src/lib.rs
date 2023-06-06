@@ -29,15 +29,19 @@ mod test {
         let _test_lock = TEST_LOCK.lock().expect("test lock poisoned");
 
         // 1st init
-        let sdk = Sdk::new().expect("LG SDK");
+        let sdk = Sdk::new().expect("failed to init LG SDK");
         std::thread::sleep(Duration::from_secs(5));
         drop(sdk);
         std::thread::sleep(Duration::from_secs(5));
 
         // 2nd init
-        let sdk = Sdk::new_with_name("Test").unwrap();
+        let sdk = Sdk::new_with_name("Test").expect("failed to init LG SDK");
+
+        // 3rd init fails, we already opened the 2nd.
+        assert!(Sdk::new().is_none());
+
         std::thread::sleep(Duration::from_secs(5));
-        let _version = sdk.get_version().unwrap();
+        let _version = sdk.get_version().expect("failed to get LG SDK version");
         assert!(sdk.set_target(TargetDevice::All));
         assert!(sdk.set_lighting(ColorPercent::new_rgb(255, 255, 255)));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::L, ColorPercent::new_rgb(0, 255, 255)));
@@ -84,7 +88,7 @@ mod test {
     fn logi_set_target_zone_sample() {
         let _test_lock = TEST_LOCK.lock().expect("test lock poisoned");
 
-        let sdk = Sdk::new_with_name("Test").expect("LG SDK");
+        let sdk = Sdk::new_with_name("Test").expect("failed to init LG SDK");
         std::thread::sleep(Duration::from_secs(5));
         assert!(sdk.set_target(TargetDevice::All));
         assert!(sdk.set_lighting_for_key_with_name(KeyName::L, ColorPercent::new_rgb(0, 255, 255)));
