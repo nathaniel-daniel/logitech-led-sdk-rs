@@ -7,7 +7,8 @@ The library will use internal synchronization to ensure accesses to the library 
 The goal of this binding is to provide a wrapper for the SDK, not to provide a method to interact with LEDs on Logitech devices. 
 
 ## Documentation
-See <https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk/>
+Release: https://docs.rs/crate/logitech-led-sdk/latest/logitech_led_sdk/
+Master: https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk/
 
 ## Building
 You need to seperately download the LG SDK. You can find it publicly [here](https://www.logitechg.com/en-us/innovation/developer-lab.html).
@@ -19,17 +20,20 @@ Example: `LOGITECH_LED_SDK = C:\Users\[username]\Documents\code\LED_SDK_9.00\LED
 ## Example
 ```rust
 use logitech_led_sdk::Sdk;
-use logitech_led_sdk::Color;
-use logitech_led_sdk::Target;
+use logitech_led_sdk::ColorPercent;
+use logitech_led_sdk::TargetDevice;
 
 fn main() {
-    let sdk = Sdk::new_with_name("Test").unwrap();
+    /// Do not use `expect` in a real application.
+    /// If this fails, its likely that the user does not have LGS or LG HUB installed.
+    let sdk = Sdk::new_with_name("Test").expect("failed to initialize SDK");
     
-    let version = sdk.get_version().unwrap();
+    let version = sdk.get_version().expect("failed to get version");
     println!("Version: {:#?}", version);
     
-    assert!(sdk.set_target(Target::All));
-    assert!(sdk.set_lighting(Color::new(255, 255, 255)));
+    /// Do not use `assert!` in a real application.
+    assert!(sdk.set_target(TargetDevice::All));
+    assert!(sdk.set_lighting(ColorPercent::new_rgb(255, 255, 255)));
 }
 ```
 

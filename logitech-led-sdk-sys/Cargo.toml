@@ -1,11 +1,17 @@
 [package]
 name = "logitech-led-sdk-sys"
-version = "0.1.0"
+version = "0.1.1"
 authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 build = "build.rs"
 license = "MIT OR Apache-2.0"
 description = "A low level Rust binding for the Logitech LED SDK"
+repository = "https://github.com/nathaniel-daniel/logitech-led-sdk-rs"
+homepage = "https://github.com/nathaniel-daniel/logitech-led-sdk-rs"
+documentation = "https://docs.rs/logitech-led-sdk-sys/latest/logitech_led_sdk_sys/"
+keywords = [ "logitech", "led", "bindings" ]
+categories = [ "external-ffi-bindings" ]
+readme = "README.md"
 exclude = [
     "*.py",
     "wrapper.h",
