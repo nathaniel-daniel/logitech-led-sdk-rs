@@ -39,23 +39,12 @@ jobs:
         
       - name: Set Logitech LED SDK Location
         run: echo "LOGITECH_LED_SDK=${env:GITHUB_WORKSPACE}/LED" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        
-      - name: Install Scoop
-        run: |
-          irm get.scoop.sh -outfile 'install-scoop.ps1'
-          .\install-scoop.ps1 -RunAsAdmin
-          echo "$($HOME)/scoop/shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          
-      - name: Install LLVM
-        run: |
-          scoop install llvm
-          echo "LIBCLANG_PATH=$($HOME)/scoop/apps/llvm/current/bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           
       - name: RustFmt
-        run: cargo fmt -- --check --color always
+        run: cargo fmt --all -- --check --color always
           
       - name: Clippy
-        run: cargo clippy --tests --workspace -- -D warnings
+        run: cargo clippy --target i686-pc-windows-msvc --target x86_64-pc-windows-msvc --tests --workspace -- -D warnings
 
   deny:
     name: Deny
@@ -93,20 +82,12 @@ jobs:
       
     - name: Set Logitech LED SDK Location
       run: echo "LOGITECH_LED_SDK=${env:GITHUB_WORKSPACE}/LED" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        
+    - name: Build i686-pc-windows-msvc
+      run: cargo build --verbose --target i686-pc-windows-msvc
       
-    - name: Install Scoop
-      run: |
-        irm get.scoop.sh -outfile 'install-scoop.ps1'
-        .\install-scoop.ps1 -RunAsAdmin
-        echo "$($HOME)/scoop/shims" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-        
-    - name: Install LLVM
-      run: |
-        scoop install llvm
-        echo "LIBCLANG_PATH=$($HOME)/scoop/apps/llvm/current/bin" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        
-    - name: Build
-      run: cargo build --verbose
+    - name: Build x86_64-pc-windows-msvc
+      run: cargo build --verbose --target x86_64-pc-windows-msvc
     
     # Cannot test on CI as there is no LGS or LGHUB on there. Is it possible to install it?
     # - name: Run Tests
