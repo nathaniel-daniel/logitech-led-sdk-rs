@@ -10,7 +10,7 @@ checksum = "6776fc96284a0bb647b615056fc496d1fe1644a7ab01829818a6d91cae888b84"
 
 [[package]]
 name = "logitech-led-sdk"
-version = "0.0.0"
+version = "0.1.1"
 dependencies = [
  "bitflags",
  "logitech-led-sdk-sys",
@@ -18,4 +18,4 @@ dependencies = [
 
 [[package]]
 name = "logitech-led-sdk-sys"
-version = "0.0.0"
+version = "0.1.1"
