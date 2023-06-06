@@ -5,6 +5,10 @@ authors = [ "Nathaniel Daniel <nathaniel.daniel12@gmail.com>" ]
 edition = "2021"
 build = "build.rs"
 license = "MIT OR Apache-2.0"
+exclude = [
+    "*.py",
+    "wrapper.h",
+]
 
 [dependencies]
 
