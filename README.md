@@ -1,6 +1,10 @@
 # logitech-led-sdk-rs
-A Rust Binding for the Logitech LED Library. This was built and tested with v9.00. It will most likely work with LGS and definitely works with LG HUB. 
-Due to a lack of documentation, the SDK is assumed to be single-threaded. The library will use internal synchronization to ensure accesses to the library are safe. The goal of this binding is to provide a wrapper for the SDK, not to provide a method to interact with LEDs on Logitech devices. 
+A Rust Binding for the Logitech LED Library. 
+This was built and tested with v9.00. 
+It will most likely work with LGS and definitely works with LG HUB. 
+Due to a lack of documentation, the SDK is assumed to be single-threaded. 
+The library will use internal synchronization to ensure accesses to the library are safe. 
+The goal of this binding is to provide a wrapper for the SDK, not to provide a method to interact with LEDs on Logitech devices. 
 
 ## Documentation
 See <https://nathaniel-daniel.github.io/logitech-led-sdk-rs/logitech_led_sdk/>
@@ -29,5 +33,19 @@ fn main() {
 }
 ```
 
+## Testing
+On a PC with either LGS or LG HUB running, run:
+```bash
+cargo test
+```
+
 ## License
-This crate is dual-licensed under [Apache](./LICENSE-APACHE) and [MIT](LICENSE-MIT).
+Licensed under either of
+
+    Apache License, Version 2.0 (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
+    MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
+
+at your option.
+
+## Contributing
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
