@@ -19,7 +19,7 @@ exclude = [
 ]
 
 [dependencies]
-bitflags = "2.3.1"
+bitflags = "2.3.2"
 logitech-led-sdk-sys = { path = "logitech-led-sdk-sys", version = "0.1.0" }
 
 [features]
