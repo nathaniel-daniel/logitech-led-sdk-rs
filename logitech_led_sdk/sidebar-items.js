@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["DeviceType","KeyName"],"static":["SDK_LOCK"],"struct":["ColorPercent","Sdk","TargetDevice"]};
